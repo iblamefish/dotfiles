@@ -1,3 +1,24 @@
 alias vi=vim
 
 set -o vi
+
+function vcd() {
+  if [ $# -ne 1 ]; then
+    echo "vcd - change to site directory installed by VVV"
+    echo 
+    echo "Usage: vcd sitename"
+    echo 
+    return 1
+  fi
+  if [ -d ~/vagrant-local/www/$1/htdocs/wp-content/themes ]; then
+    cd ~/vagrant-local/www/$1/htdocs/wp-content/themes;
+    return 0
+  else
+    red='\033[0;31m'
+    rst='\033[0m'
+    echo -e "${red}Site directory $1 does not exist${rst}"
+    return 2
+  fi
+
+
+}
